@@ -30,9 +30,9 @@ alias tf="terraform"
 alias tfi="terraform init"
 
 function set_region_arg() {
-  if [ -n "$DEPLOY_REGION" ]; then
-    export ARG_="-var region=$DEPLOY_REGION"
-    echo "Deploying to $DEPLOY_REGION"
+  if [ -n "$AWS_REGION" ]; then
+    export ARG_="-var region=$AWS_REGION"
+    echo "Deploying to $AWS_REGION"
   else
     unset ARG_
   fi
