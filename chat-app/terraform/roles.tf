@@ -23,7 +23,7 @@ resource "aws_iam_role" "apigateway-cloudwatch-log-role" {
   assume_role_policy = data.aws_iam_policy_document.ApiGatewayAssumeRole.json
 }
 
-resource "aws_iam_role_policy_attachment" "lambda-role-apigateway-websocket-policy" {
+resource "aws_iam_role_policy_attachment" "apigateway-role-cloudwatch-log-policy" {
   policy_arn = aws_iam_policy.apigateway-logging-access.arn
   role = aws_iam_role.apigateway-cloudwatch-log-role.id
 }
