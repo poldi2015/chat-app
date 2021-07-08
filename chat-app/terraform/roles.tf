@@ -14,6 +14,6 @@ resource "aws_iam_role_policy_attachment" "lambda-role-dynamodb-policy" {
 }
 
 resource "aws_iam_role_policy_attachment" "lambda-role-apigateway-websocket-policy" {
-  policy_arn = aws_iam_policy.lambda-apigateway-websocket-access
+  policy_arn = aws_iam_policy.lambda-apigateway-websocket-access.arn
   role = aws_iam_role.lambda-role.id
 }
