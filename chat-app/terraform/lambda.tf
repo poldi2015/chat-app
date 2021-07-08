@@ -40,7 +40,6 @@ resource "aws_lambda_layer_version" "lambda-nodejs-layer-version" {
 module "functions" {
   source = "./lambda-function"
   for_each = toset(["onconnect","ondisconnect","sendmessage"])
-  depends_on = [aws_cloudwatch_log_group.lambda-log-group]
 
   app-name = var.app-name
   function-name = each.key

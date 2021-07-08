@@ -12,18 +12,19 @@ data "aws_iam_policy_document" "LambdaAssumeRole" {
 
 data "aws_iam_policy_document" "LambdaLogGroupAccess" {
   statement {
-    sid = "LambdaLogGroupAccessSid"
+    sid = "LambdaLogGroupCreateSid"
     effect = "Allow"
     actions = [
       "logs:CreateLogGroup",
       "logs:CreateLogStream"
     ]
-    resources = [ aws_cloudwatch_log_group.lambda-log-group.arn ]
+    resources = [ "arn:aws:logs:*:*:*" ]
   }
   statement {
+    sid = "LambdaLogGroupWriteSid"
     effect    = "Allow"
     actions   = ["logs:PutLogEvents"]
-    resources = ["${aws_cloudwatch_log_group.lambda-log-group.arn}:*"]
+    resources = ["arn:aws:logs:*:*:*"]
   }
 }
 
