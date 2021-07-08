@@ -15,7 +15,7 @@ terraform {
 provider "aws" {
   region = "eu-central-1"
   assume_role {
-    role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/student-deploy"
+    role_arn = "arn:aws:iam::110807749034:role/student-deploy"
   }
 }
 
