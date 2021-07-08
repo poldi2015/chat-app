@@ -1,5 +1,5 @@
 locals {
-  hosting-bucket-name = "8ac794582f-kabatrinkerlean-chat-app"
+  hosting-bucket-name = "${var.account}-chat-app"
   frontend-path = "${path.module}/../src/frontend"
 }
 
