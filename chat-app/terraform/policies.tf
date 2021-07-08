@@ -35,3 +35,52 @@ resource "aws_iam_policy" "lambda-log-group-access" {
   policy = data.aws_iam_policy_document.LambdaLogGroupAccess.json
 }
 
+data "aws_iam_policy_document" "DynamoDBCrudAccess" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "dynamodb:GetItem",
+      "dynamodb:DeleteItem",
+      "dynamodb:PutItem",
+      "dynamodb:Scan",
+      "dynamodb:Query",
+      "dynamodb:UpdateItem",
+      "dynamodb:BatchWriteItem",
+      "dynamodb:BatchGetItem",
+      "dynamodb:DescribeTable",
+      "dynamodb:ConditionCheckItem"
+    ]
+    resources = [
+      aws_dynamodb_table.chat-app-messages.arn,
+      "${aws_dynamodb_table.chat-app-messages.arn}/index/*"
+    ]
+  }
+}
+
+resource "aws_iam_policy" "lambda-dynamodb-access" {
+  name = "DynamoDBCrudAccess"
+  path = "/"
+  description = "Permission to allow lambda function CRUD operations to the DynamoDB table"
+  policy = data.aws_iam_policy_document.DynamoDBCrudAccess.json
+}
+
+/*
+data "aws_iam_policy_document" "ApiGatewayWebsocketAccess" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "execute-api:ManageConnections"
+    ]
+    resources = [
+      TBD
+    ]
+  }
+}
+
+resource "aws_iam_policy" "lambda-apigateway-websocket-access" {
+  name = "ApiGatewayWebsocketAccess"
+  path = "/"
+  description = "Permission to send messages to a WebSocket via ApiGateway"
+  policy = data.aws_iam_policy_document.ApiGatewayWebsocketAccess.json
+}
+*/

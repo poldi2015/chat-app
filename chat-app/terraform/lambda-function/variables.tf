@@ -17,3 +17,14 @@ variable "role-arn" {
   description = "arn of the role to assing to the lambda function"
   type = string
 }
+
+variable "dynamodb-table-name" {
+  description = "Name of the DynamoDB table to access by the lambda function"
+  type = string
+}
+
+variable "region" {
+  description = "AWS region where dynamoDB is deployed"
+  type = string
+  default = "eu-central-1"
+}

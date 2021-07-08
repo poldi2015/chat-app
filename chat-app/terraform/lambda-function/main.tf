@@ -22,4 +22,12 @@ resource "aws_lambda_function" "lambda-function" {
   publish = "true"
   layers = [var.layer-arn]
   role = var.role-arn
+  memory_size = 256
+
+  environment {
+    variables = {
+      TABLE_NAME = ""
+      AWS_REGION = var.region
+    }
+  }
 }
