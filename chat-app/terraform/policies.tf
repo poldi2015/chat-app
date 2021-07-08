@@ -99,6 +99,18 @@ data "aws_iam_policy_document" "ApiGatewayLoggingAccess" {
   }
 }
 
+data "aws_iam_policy_document" "ApiGatewayAssumeRole" {
+  statement {
+    effect = "Allow"
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type = "Service"
+      identifiers = ["apigateway.amazonaws.com"]
+    }
+  }
+}
+
 resource "aws_iam_policy" "apigateway-logging-access" {
   name = "ApiGatewayLoggingAccess"
   path = "/"
