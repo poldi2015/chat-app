@@ -20,3 +20,7 @@ provider "aws" {
 }
 
 data "aws_caller_identity" "current" {}
+
+locals {
+  build-path = "${path.module}/build"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "chat-app-nodejs-layer",
+  "version": "1.0.0",
+  "description": "Shared lambda layewr nodejs for chat-app",
+  "author": "SAM CLI",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "aws-sdk": "^2.739.0"
+  }
+}
