@@ -82,3 +82,26 @@ resource "aws_iam_policy" "lambda-apigateway-websocket-access" {
   description = "Permission to send messages to a WebSocket via ApiGateway"
   policy = data.aws_iam_policy_document.ApiGatewayWebsocketAccess.json
 }
+
+data "aws_iam_policy_document" "ApiGatewayLoggingAccess" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:DescribeLogGroups",
+      "logs:DescribeLogStreams",
+      "logs:PutLogEvents",
+      "logs:GetLogEvents",
+      "logs:FilterLogEvents"
+    ]
+    resources = [ "*" ]
+  }
+}
+
+resource "aws_iam_policy" "apigateway-logging-access" {
+  name = "ApiGatewayLoggingAccess"
+  path = "/"
+  description = "Allows ApiGateway to write logs to Cloudwatch"
+  policy = data.aws_iam_policy_document.ApiGatewayLoggingAccess.json
+}

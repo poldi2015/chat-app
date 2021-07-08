@@ -1,3 +1,7 @@
+resource "aws_api_gateway_account" "demo" {
+  cloudwatch_role_arn = aws_iam_role.apigateway-cloudwatch-log-role.arn
+}
+
 resource "aws_apigatewayv2_api" "chat-app-web-socket" {
   name = "ChatAppWebSocked"
   protocol_type = "WEBSOCKET"
