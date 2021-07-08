@@ -4,7 +4,7 @@
 # Install terraform
 #
 
-if [ ! -x "$(which terraform)" ];
+if [ ! -x "$(which terraform)" ]; then
   export release=AmazonLinux
   sudo yum install -q -y yum-utils
   sudo yum-config-manager -q -y --add-repo https://rpm.releases.hashicorp.com/$release/hashicorp.repo
