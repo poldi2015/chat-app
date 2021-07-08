@@ -50,6 +50,15 @@ resource "aws_apigatewayv2_integration" "web-socket-sendmessage-integration" {
 
 resource "aws_apigatewayv2_deployment" "web-socket-deployment" {
   api_id = aws_apigatewayv2_api.chat-app-web-socket.id
+
+  depends_on = [
+    aws_apigatewayv2_route.web-socket-onconnect,
+    aws_apigatewayv2_route.web-socket-ondisconnect,
+    aws_apigatewayv2_route.web-socket-sendmessage
+  ]
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_apigatewayv2_stage" "web-socket-stage" {
