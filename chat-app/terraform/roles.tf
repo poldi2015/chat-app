@@ -1,6 +1,10 @@
 resource "aws_iam_role" "lambda-role" {
   name = "${var.app-name}-lambda"
   assume_role_policy = data.aws_iam_policy_document.LambdaAssumeRole.json
+
+  tags = {
+    Source = "chat-app"
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "lambda-role-log-group-access-policy" {
@@ -21,6 +25,10 @@ resource "aws_iam_role_policy_attachment" "lambda-role-apigateway-websocket-poli
 resource "aws_iam_role" "apigateway-cloudwatch-log-role" {
   name = "apigateway-log"
   assume_role_policy = data.aws_iam_policy_document.ApiGatewayAssumeRole.json
+
+  tags = {
+    Source = "chat-app"
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "apigateway-role-cloudwatch-log-policy" {

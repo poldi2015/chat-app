@@ -10,4 +10,8 @@ resource "aws_dynamodb_table" "chat-app-messages" {
     name = "connectionId"
     type = "S"
   }
+
+  tags = {
+    Source = "chat-app"
+  }
 }

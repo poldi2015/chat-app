@@ -11,6 +11,10 @@ resource "aws_apigatewayv2_api" "chat-app-web-socket" {
   protocol_type = "WEBSOCKET"
   route_selection_expression = "$request.body.action"
   depends_on = [aws_api_gateway_account.chat-app-api-gateway]
+
+  tags = {
+    Source = "chat-app"
+  }
 }
 
 #
@@ -96,5 +100,9 @@ resource "aws_apigatewayv2_stage" "web-socket-stage" {
     data_trace_enabled = true
     detailed_metrics_enabled = true
     logging_level = "INFO"
+  }
+
+  tags = {
+    Source = "chat-app"
   }
 }

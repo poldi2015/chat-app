@@ -16,6 +16,10 @@ data "archive_file" "lambda-package" {
 resource "aws_cloudwatch_log_group" "lambda-log-group" {
   name = "/aws/lambda/${var.function-name}"
   retention_in_days = 14
+
+  tags = {
+    Source = "chat-app"
+  }
 }
 
 resource "aws_lambda_function" "lambda-function" {
@@ -36,6 +40,10 @@ resource "aws_lambda_function" "lambda-function" {
   }
 
   depends_on = [aws_cloudwatch_log_group.lambda-log-group]
+
+  tags = {
+    Source = "chat-app"
+  }
 }
 
 resource "aws_lambda_permission" "lambda-function-permission-apigateway" {
