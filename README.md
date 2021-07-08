@@ -160,12 +160,14 @@ The chat-app is deployed executing the following steps:
 
 1. Login to your AWS Account
 2. Change to region `Europe (Ireland) eu-west-1`
-3. Start the service AWS CloudShell
-4. Clone the complete git repository into the home directory within the AWS CloudShell.
-5. Change to the root directory of the git repository: `# cd cloudshell_provisioning`
-6. Load the shell script `bashrc_local` to install terraform, and editor and some shell aliases `# . ./bashrc_local`.
-7. Change to the terraform provisioning directory `# cd chat-app/terraform`
-8. Run terraform deployment via an alias set by `bashrc_local`: `# tfpa`
+3. Create an S3 bucket used to store the terraform state file
+4. Start the service AWS CloudShell
+5. Clone the complete git repository into the home directory within the AWS CloudShell.
+6. Change to the root directory of the git repository: `# cd cloudshell_provisioning`
+7. Load the shell script `bashrc_local` to install terraform, and editor and some shell aliases `# . ./bashrc_local`.
+8. Change to the terraform provisioning directory `# cd chat-app/terraform`
+9. Edit `main.tf` (use vi or nano editor): Replace the bucket name in the `backend` with the name of the bucket you created   
+10. Run terraform deployment via an alias set by `bashrc_local`: `# tfpa`
 
 Tipp:
 Add the following snipped to the `.bashrc` of the AWS CloudShell:
@@ -184,7 +186,7 @@ fi
 1. Login to your AWS Account
 2. Change to region `Europe (Ireland) eu-west-1`
 3. Open the service AWS S3
-4. Find and click the S3 bucket `8ac794582f-kabatrinkerlean-chat-app`
+4. Find and click the S3 bucket `<Account-ID>-chat-app`
 5. Find the `Bucket website endpoint` on the tab `Properties` at the very end of the properties beneath 
    `Static website hosting` 
 6. Enter the URL of the bucket into your Web browser
