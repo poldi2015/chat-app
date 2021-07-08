@@ -1,4 +1,6 @@
 locals {
+  hosting-bucket-name = "kabatrinkerlean-chat-app"
+  logging-bucket-name = "kabatrinkerlearn-logging"
   frontend-path = "${path.module}/../frontend"
 }
 
@@ -10,16 +12,19 @@ data "aws_iam_policy_document" "hosting-bucket-policy" {
       identifiers = ["*"]
       type = "AWS"
     }
-    actions = [ "GetObject"]
+    actions = [
+      "GetObject"
+    ]
     resources = [
-      aws_s3_bucket.hosting-bucket.arn,
-      "$aws_s3_bucket.hosting-bucket.arn}/*"]
+      "arn:aws:s3:::${local.hosting-bucket-name}",
+      "arn:aws:s3:::${local.hosting-bucket-name}/*"
+    ]
   }
 }
 
 resource "aws_s3_bucket" "hosting-bucket" {
-  bucket = "kabatrinkerlearn-chat-app"
-  acl    = "public-read"
+  bucket = local.hosting-bucket-name
+  acl = "public-read"
   policy = data.aws_iam_policy_document.hosting-bucket-policy.json
 
   website {
@@ -28,7 +33,7 @@ resource "aws_s3_bucket" "hosting-bucket" {
   }
 
   logging {
-    target_bucket = "kabatrinkerlearn-logging"
+    target_bucket = local.logging-bucket-name
     target_prefix = "chat-app-log/"
   }
 
@@ -38,8 +43,8 @@ resource "aws_s3_bucket" "hosting-bucket" {
 }
 
 resource "aws_s3_bucket_object" "hosting-bucket-content" {
-  bucket =aws_s3_bucket.hosting-bucket.id
-  for_each = toset(fileset(local.frontend-path,"*.html"))
+  bucket = aws_s3_bucket.hosting-bucket.id
+  for_each = toset(fileset(local.frontend-path, "*.html"))
   key = each.key
   source = "${local.frontend-path}/${each.key}"
 }
