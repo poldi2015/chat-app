@@ -13,7 +13,7 @@ data "aws_iam_policy_document" "hosting-bucket-policy" {
       type = "AWS"
     }
     actions = [
-      "GetObject"
+      "s3:GetObject"
     ]
     resources = [
       "arn:aws:s3:::${local.hosting-bucket-name}",
