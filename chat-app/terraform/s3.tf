@@ -69,3 +69,11 @@ resource "aws_s3_bucket_object" "hosting-bucket-content-gif" {
   source = "${local.frontend-path}/${each.key}"
   content_type = "image/gif"
 }
+
+resource "aws_s3_bucket_object" "hosting-bucket-content-backend-url" {
+  bucket = aws_s3_bucket.hosting-bucket.id
+  key = "backend_url.js"
+  content = "export let backendURL=\"${aws_apigatewayv2_stage.web-socket-stage.invoke_url}\"\n"
+  content_type = "text/javascript"
+  depends_on = [aws_apigatewayv2_stage.web-socket-stage]
+}

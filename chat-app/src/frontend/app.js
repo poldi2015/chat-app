@@ -1,4 +1,5 @@
-var backendURL = 'wss://y0klom01si.execute-api.eu-west-1.amazonaws.com/Prod';
+//var backendURL = 'wss://y0klom01si.execute-api.eu-west-1.amazonaws.com/Prod';
+import backendURL from './backend_url.js'
 
 var me = {};
 me.avatar = "./karate-left.gif";
