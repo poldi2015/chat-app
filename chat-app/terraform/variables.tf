@@ -12,7 +12,7 @@ variable "app-name" {
 variable "region" {
     description = "AWS to deploy to"
     type = string
-    default = "eu-central-1"
+    default = "eu-west-1"
 }
 
 variable "terraform-role-name" {
