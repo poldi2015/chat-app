@@ -1,8 +1,8 @@
 terraform {
   backend "s3" {
-    bucket = "kabatrinkerlearn-deploy"
+    bucket = var.deploy-bucket-name
     key    = "terraform"
-    region = "eu-central-1"
+    region = var.region
   }
   required_providers {
     aws = {
@@ -13,9 +13,9 @@ terraform {
 }
 
 provider "aws" {
-  region = "eu-central-1"
+  region = var.region
   assume_role {
-    role_arn = "arn:aws:iam::${var.account}:role/student-deploy"
+    role_arn = "arn:aws:iam::${var.account}:role/${var.terraform-role-name}"
   }
 }
 
