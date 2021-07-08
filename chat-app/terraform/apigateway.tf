@@ -58,6 +58,7 @@ resource "aws_apigatewayv2_deployment" "web-socket-deployment" {
   ]
   lifecycle {
     create_before_destroy = true
+
   }
 }
 
@@ -65,4 +66,11 @@ resource "aws_apigatewayv2_stage" "web-socket-stage" {
   api_id = aws_apigatewayv2_api.chat-app-web-socket.id
   name = "Prod"
   deployment_id =aws_apigatewayv2_deployment.web-socket-deployment.id
+  auto_deploy = true
+  route_settings {
+    route_key = aws_apigatewayv2_route.web-socket-sendmessage.route_key
+    data_trace_enabled = true
+    detailed_metrics_enabled = true
+    logging_level = "INFO"
+  }
 }
