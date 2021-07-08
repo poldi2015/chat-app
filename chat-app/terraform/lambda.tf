@@ -34,7 +34,7 @@ resource "aws_lambda_layer_version" "lambda-nodejs-layer-version" {
 }
 
 #
-# Lambda function package
+# Lambda functions
 #
 
 module "functions" {

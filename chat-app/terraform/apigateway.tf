@@ -1,3 +1,7 @@
+#
+# API Registration
+#
+
 resource "aws_api_gateway_account" "chat-app-api-gateway" {
   cloudwatch_role_arn = aws_iam_role.apigateway-cloudwatch-log-role.arn
 }
@@ -8,6 +12,10 @@ resource "aws_apigatewayv2_api" "chat-app-web-socket" {
   route_selection_expression = "$request.body.action"
   depends_on = [aws_api_gateway_account.chat-app-api-gateway]
 }
+
+#
+# onconnect route
+#
 
 resource "aws_apigatewayv2_route" "web-socket-onconnect" {
   api_id = aws_apigatewayv2_api.chat-app-web-socket.id
@@ -20,9 +28,13 @@ resource "aws_apigatewayv2_route" "web-socket-onconnect" {
 
 resource "aws_apigatewayv2_integration" "web-socket-onconnect-integration" {
   api_id = aws_apigatewayv2_api.chat-app-web-socket.id
-  integration_type = "AWS"
+  integration_type = "AWS_PROXY"
   integration_uri = module.functions["onconnect"].function-invoke-arn
 }
+
+#
+# disconnect route
+#
 
 resource "aws_apigatewayv2_route" "web-socket-ondisconnect" {
   api_id = aws_apigatewayv2_api.chat-app-web-socket.id
@@ -35,9 +47,13 @@ resource "aws_apigatewayv2_route" "web-socket-ondisconnect" {
 
 resource "aws_apigatewayv2_integration" "web-socket-disconnect-integration" {
   api_id = aws_apigatewayv2_api.chat-app-web-socket.id
-  integration_type = "AWS"
+  integration_type = "AWS_PROXY"
   integration_uri = module.functions["ondisconnect"].function-invoke-arn
 }
+
+#
+# sendmessage route
+#
 
 resource "aws_apigatewayv2_route" "web-socket-sendmessage" {
   api_id = aws_apigatewayv2_api.chat-app-web-socket.id
@@ -49,9 +65,13 @@ resource "aws_apigatewayv2_route" "web-socket-sendmessage" {
 
 resource "aws_apigatewayv2_integration" "web-socket-sendmessage-integration" {
   api_id = aws_apigatewayv2_api.chat-app-web-socket.id
-  integration_type = "AWS"
+  integration_type = "AWS_PROXY"
   integration_uri = module.functions["sendmessage"].function-invoke-arn
 }
+
+#
+# deployment and stage
+#
 
 resource "aws_apigatewayv2_deployment" "web-socket-deployment" {
   api_id = aws_apigatewayv2_api.chat-app-web-socket.id
