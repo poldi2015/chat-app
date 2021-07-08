@@ -1,5 +1,5 @@
 locals {
-  hosting-bucket-name = "kabatrinkerlean-chat-app"
+  hosting-bucket-name = "8ac794582f-kabatrinkerlean-chat-app"
   frontend-path = "${path.module}/../src/frontend"
 }
 
@@ -25,6 +25,8 @@ resource "aws_s3_bucket" "hosting-bucket" {
   bucket = local.hosting-bucket-name
   acl = "public-read"
   policy = data.aws_iam_policy_document.hosting-bucket-policy.json
+
+  force_destroy = true
 
   website {
     index_document = "index.html"
