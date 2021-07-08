@@ -4,7 +4,7 @@
 # Install terraform
 #
 
-if [ ! -x "$(which terraform)" ]; then
+if [ ! -x "$(which terraform 2>/dev/null)" ]; then
   export release=AmazonLinux
   sudo yum install -q -y yum-utils &>/dev/null
   sudo yum-config-manager -q -y --add-repo https://rpm.releases.hashicorp.com/$release/hashicorp.repo &>/dev/null
@@ -12,10 +12,10 @@ if [ ! -x "$(which terraform)" ]; then
 
   echo 'plugin_cache_dir = "$HOME/.terraform.d/plugin-cache"' >~/.terraform.rc
 fi
-if [ ! -x "$(which nano)" ]; then
+if [ ! -x "$(which nano 2>/dev/null)" ]; then
   sudo yum install -q -y nano &>/dev/null
 fi
-if [ ! -x "$(which wscat)" ]; then
+if [ ! -x "$(which wscat 2>/dev/null)" ]; then
   sudo npm install -g wscat &>/dev/null
 fi
 
