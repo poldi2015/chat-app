@@ -36,9 +36,34 @@ resource "aws_s3_bucket" "hosting-bucket" {
   }
 }
 
-resource "aws_s3_bucket_object" "hosting-bucket-content" {
+resource "aws_s3_bucket_object" "hosting-bucket-content-html" {
   bucket = aws_s3_bucket.hosting-bucket.id
   for_each = toset(fileset(local.frontend-path, "*.html"))
   key = each.key
   source = "${local.frontend-path}/${each.key}"
+  content_type = "text/html"
+}
+
+resource "aws_s3_bucket_object" "hosting-bucket-content-css" {
+  bucket = aws_s3_bucket.hosting-bucket.id
+  for_each = toset(fileset(local.frontend-path, "*.css"))
+  key = each.key
+  source = "${local.frontend-path}/${each.key}"
+  content_type = "text/css"
+}
+
+resource "aws_s3_bucket_object" "hosting-bucket-content-js" {
+  bucket = aws_s3_bucket.hosting-bucket.id
+  for_each = toset(fileset(local.frontend-path, "*.js"))
+  key = each.key
+  source = "${local.frontend-path}/${each.key}"
+  content_type = "text/javascript"
+}
+
+resource "aws_s3_bucket_object" "hosting-bucket-content-gif" {
+  bucket = aws_s3_bucket.hosting-bucket.id
+  for_each = toset(fileset(local.frontend-path, "*.gif"))
+  key = each.key
+  source = "${local.frontend-path}/${each.key}"
+  content_type = "image/gif"
 }
