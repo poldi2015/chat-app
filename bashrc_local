@@ -6,11 +6,14 @@
 
 if [ ! -x "$(which terraform)" ]; then
   export release=AmazonLinux
-  sudo yum install -q -y yum-utils
-  sudo yum-config-manager -q -y --add-repo https://rpm.releases.hashicorp.com/$release/hashicorp.repo
-  sudo yum -q -y install terraform  
+  sudo yum install -q -y yum-utils &>/dev/null
+  sudo yum-config-manager -q -y --add-repo https://rpm.releases.hashicorp.com/$release/hashicorp.repo &>/dev/null
+  sudo yum -q -y install terraform  &>/dev/null
 
   echo 'plugin_cache_dir = "$HOME/.terraform.d/plugin-cache"' >~/.terraform.rc
+fi
+if [ ! -x "$(which nano)" ]; then
+  sudo yum install -q -y nano &>/dev/null
 fi
 
 
@@ -24,3 +27,6 @@ alias tf="terraform"
 alias tfi="terraform init"
 alias tfp="terraform plan -var account=${AWS_ACCOUNT} -input=false -out tfplan"
 alias tfa="terraform apply -auto-approve -input=false tfplan"
+alias tfpa="terraform plan -var account=${AWS_ACCOUNT} -input=false -out tfplan && terraform apply -auto-approve -input=false tfplan"
+
+alias gpull='git fetch --all --prune --prune-tags --tags;git pull'
