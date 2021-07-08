@@ -72,7 +72,7 @@ data "aws_iam_policy_document" "ApiGatewayWebsocketAccess" {
       "execute-api:ManageConnections"
     ]
     resources = [
-      aws_apigatewayv2_api.chat-app-web-socket.execution_arn
+      "${aws_apigatewayv2_api.chat-app-web-socket.execution_arn}/*"
     ]
   }
 }
