@@ -1,8 +1,8 @@
 terraform {
   backend "s3" {
-    bucket = var.deploy-bucket-name
+    bucket = "kabatrinkerlearn-deploy"
     key    = "terraform"
-    region = var.region
+    region = "eu-central-1"
   }
   required_providers {
     aws = {
