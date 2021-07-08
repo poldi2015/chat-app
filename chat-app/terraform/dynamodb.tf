@@ -1,7 +1,8 @@
 resource "aws_dynamodb_table" "chat-app-messages" {
   name           = "ChatAppMessages"
-  read_capacity  = 5
-  write_capacity = 5
+  billing_mode = "PAY_PER_REQUEST"
+  write_capacity = 2
+  read_capacity = 2
 
   hash_key       = "connectionId"
 
