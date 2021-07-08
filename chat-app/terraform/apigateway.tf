@@ -1,4 +1,4 @@
-resource "aws_api_gateway_account" "demo" {
+resource "aws_api_gateway_account" "chat-app-api-gateway" {
   cloudwatch_role_arn = aws_iam_role.apigateway-cloudwatch-log-role.arn
 }
 
@@ -6,6 +6,7 @@ resource "aws_apigatewayv2_api" "chat-app-web-socket" {
   name = "ChatAppWebSocked"
   protocol_type = "WEBSOCKET"
   route_selection_expression = "$request.body.action"
+  depends_on = [aws_api_gateway_account.chat-app-api-gateway]
 }
 
 resource "aws_apigatewayv2_route" "web-socket-onconnect" {
