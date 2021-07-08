@@ -30,3 +30,9 @@ resource "aws_lambda_function" "lambda-function" {
     }
   }
 }
+
+resource "aws_lambda_permission" "lambda-function-permission-apigateway" {
+  action = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.lambda-function.function_name
+  principal = "apigateway.amazonaws.com"
+}

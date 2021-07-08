@@ -64,7 +64,6 @@ resource "aws_iam_policy" "lambda-dynamodb-access" {
   policy = data.aws_iam_policy_document.DynamoDBCrudAccess.json
 }
 
-/*
 data "aws_iam_policy_document" "ApiGatewayWebsocketAccess" {
   statement {
     effect = "Allow"
@@ -72,7 +71,7 @@ data "aws_iam_policy_document" "ApiGatewayWebsocketAccess" {
       "execute-api:ManageConnections"
     ]
     resources = [
-      TBD
+      aws_apigatewayv2_api.chat-app-web-socket.execution_arn
     ]
   }
 }
@@ -83,4 +82,3 @@ resource "aws_iam_policy" "lambda-apigateway-websocket-access" {
   description = "Permission to send messages to a WebSocket via ApiGateway"
   policy = data.aws_iam_policy_document.ApiGatewayWebsocketAccess.json
 }
-*/
