@@ -25,6 +25,7 @@ resource "aws_apigatewayv2_route" "web-socket-onconnect" {
   api_id = aws_apigatewayv2_api.chat-app-web-socket.id
   route_key = "$connect"
   authorization_type = "NONE"
+  api_key_required = false
   operation_name = "ConnectRoute"
   target = "integrations/${aws_apigatewayv2_integration.web-socket-onconnect-integration.id}"
   depends_on = [aws_apigatewayv2_integration.web-socket-onconnect-integration]
@@ -44,6 +45,7 @@ resource "aws_apigatewayv2_route" "web-socket-ondisconnect" {
   api_id = aws_apigatewayv2_api.chat-app-web-socket.id
   route_key = "$disconnect"
   authorization_type = "NONE"
+  api_key_required = false
   operation_name = "DisconnectRoute"
   target = "integrations/${aws_apigatewayv2_integration.web-socket-onconnect-integration.id}"
   depends_on = [aws_apigatewayv2_integration.web-socket-disconnect-integration]
@@ -62,6 +64,8 @@ resource "aws_apigatewayv2_integration" "web-socket-disconnect-integration" {
 resource "aws_apigatewayv2_route" "web-socket-sendmessage" {
   api_id = aws_apigatewayv2_api.chat-app-web-socket.id
   route_key = "sendmessage"
+  authorization_type = "NONE"
+  api_key_required = false
   operation_name = "SendRoute"
   target = "integrations/${aws_apigatewayv2_integration.web-socket-sendmessage-integration.id}"
   depends_on = [aws_apigatewayv2_integration.web-socket-sendmessage-integration]
@@ -95,11 +99,37 @@ resource "aws_apigatewayv2_stage" "web-socket-stage" {
   api_id = aws_apigatewayv2_api.chat-app-web-socket.id
   name = "Prod"
   deployment_id =aws_apigatewayv2_deployment.web-socket-deployment.id
+
+  default_route_settings {
+    data_trace_enabled = true
+    detailed_metrics_enabled = true
+    logging_level = "INFO"
+    throttling_burst_limit = 5000
+    throttling_rate_limit = 10000
+  }
+  route_settings {
+    route_key = aws_apigatewayv2_route.web-socket-onconnect.route_key
+    data_trace_enabled = true
+    detailed_metrics_enabled = true
+    logging_level = "INFO"
+    throttling_burst_limit = 5000
+    throttling_rate_limit = 10000
+  }
+  route_settings {
+    route_key = aws_apigatewayv2_route.web-socket-ondisconnect.route_key
+    data_trace_enabled = true
+    detailed_metrics_enabled = true
+    logging_level = "INFO"
+    throttling_burst_limit = 5000
+    throttling_rate_limit = 10000
+  }
   route_settings {
     route_key = aws_apigatewayv2_route.web-socket-sendmessage.route_key
     data_trace_enabled = true
     detailed_metrics_enabled = true
     logging_level = "INFO"
+    throttling_burst_limit = 5000
+    throttling_rate_limit = 10000
   }
 
   tags = {
