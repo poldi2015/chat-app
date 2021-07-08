@@ -41,4 +41,5 @@ function set_region_arg() {
 alias tfp="set_region_arg;terraform plan -var account=${AWS_ACCOUNT} $ARG_ -input=false -out tfplan"
 alias tfa="terraform apply -auto-approve -input=false tfplan"
 alias tfpa="set_region_arg;terraform plan -var account=${AWS_ACCOUNT} $ARG_ -input=false -out tfplan && terraform apply -auto-approve -input=false tfplan"
+alias tfd="set_region_arg;terraform destroy -var account=${AWS_ACCOUNT} $ARG_ -auto-approve"
 alias gpull='git fetch --all --prune --prune-tags --tags;git pull'
