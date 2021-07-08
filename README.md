@@ -221,6 +221,8 @@ https://github.com/aws-samples/simple-websockets-chat-app
 The Frontend Web Application is based on the Bootstrap Snippet "Simple Chat"
 by pablocorezzola: https://bootsnipp.com/snippets/y8e4W
 
+The cat image is from Ralf Designs on Pixabay.
+
 ## Contact
 
 * Bernd Haberstumpf <poldi@thatswing.de>

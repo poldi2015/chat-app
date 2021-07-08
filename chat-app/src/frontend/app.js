@@ -1,10 +1,10 @@
 var backendURL = 'wss://y0klom01si.execute-api.eu-west-1.amazonaws.com/Prod';
 
 var me = {};
-me.avatar = "./berni.gif";
+me.avatar = "./karate-left.gif";
 
 var you = {};
-you.avatar = "./berni.gif";
+you.avatar = "./karate-right.gif";
 
 
 function formatAMPM(date) {
