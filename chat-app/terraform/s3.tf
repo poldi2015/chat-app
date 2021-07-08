@@ -1,6 +1,5 @@
 locals {
   hosting-bucket-name = "kabatrinkerlean-chat-app"
-  logging-bucket-name = "kabatrinkerlearn-logging"
   frontend-path = "${path.module}/../frontend"
 }
 
@@ -30,11 +29,6 @@ resource "aws_s3_bucket" "hosting-bucket" {
   website {
     index_document = "index.html"
     error_document = "error.html"
-  }
-
-  logging {
-    target_bucket = local.logging-bucket-name
-    target_prefix = "chat-app-log/"
   }
 
   tags = {
