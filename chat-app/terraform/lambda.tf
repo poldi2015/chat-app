@@ -46,6 +46,6 @@ module "functions" {
   function-name = each.key
   layer-arn = aws_lambda_layer_version.lambda-nodejs-layer-version.arn
   role-arn = aws_iam_role.lambda-role.arn
-  dynamodb-table-name = "Wasinet"
+  dynamodb-table-name = aws_dynamodb_table.chat-app-messages.name
   region = var.region
 }
