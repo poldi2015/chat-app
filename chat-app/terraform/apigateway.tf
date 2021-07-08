@@ -22,7 +22,7 @@ resource "aws_apigatewayv2_route" "web-socket-onconnect" {
   route_key = "$connect"
   authorization_type = "NONE"
   operation_name = "ConnectRoute"
-  target = "/integrations/${aws_apigatewayv2_integration.web-socket-onconnect-integration.id}"
+  target = "integrations/${aws_apigatewayv2_integration.web-socket-onconnect-integration.id}"
   depends_on = [aws_apigatewayv2_integration.web-socket-onconnect-integration]
 }
 
@@ -41,7 +41,7 @@ resource "aws_apigatewayv2_route" "web-socket-ondisconnect" {
   route_key = "$disconnect"
   authorization_type = "NONE"
   operation_name = "DisconnectRoute"
-  target = "/integrations/${aws_apigatewayv2_integration.web-socket-onconnect-integration.id}"
+  target = "integrations/${aws_apigatewayv2_integration.web-socket-onconnect-integration.id}"
   depends_on = [aws_apigatewayv2_integration.web-socket-disconnect-integration]
 }
 
@@ -59,7 +59,7 @@ resource "aws_apigatewayv2_route" "web-socket-sendmessage" {
   api_id = aws_apigatewayv2_api.chat-app-web-socket.id
   route_key = "sendmessage"
   operation_name = "SendRoute"
-  target = "/integrations/${aws_apigatewayv2_integration.web-socket-sendmessage-integration.id}"
+  target = "integrations/${aws_apigatewayv2_integration.web-socket-sendmessage-integration.id}"
   depends_on = [aws_apigatewayv2_integration.web-socket-sendmessage-integration]
 }
 
