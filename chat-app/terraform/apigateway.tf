@@ -104,32 +104,32 @@ resource "aws_apigatewayv2_stage" "web-socket-stage" {
     data_trace_enabled = true
     detailed_metrics_enabled = true
     logging_level = "INFO"
-    throttling_burst_limit = 5000
-    throttling_rate_limit = 10000
+    throttling_burst_limit = 50
+    throttling_rate_limit = 100
   }
   route_settings {
     route_key = aws_apigatewayv2_route.web-socket-onconnect.route_key
     data_trace_enabled = true
     detailed_metrics_enabled = true
     logging_level = "INFO"
-    throttling_burst_limit = 5000
-    throttling_rate_limit = 10000
+    throttling_burst_limit = 50
+    throttling_rate_limit = 100
   }
   route_settings {
     route_key = aws_apigatewayv2_route.web-socket-ondisconnect.route_key
     data_trace_enabled = true
     detailed_metrics_enabled = true
     logging_level = "INFO"
-    throttling_burst_limit = 5000
-    throttling_rate_limit = 10000
+    throttling_burst_limit = 50
+    throttling_rate_limit = 100
   }
   route_settings {
     route_key = aws_apigatewayv2_route.web-socket-sendmessage.route_key
     data_trace_enabled = true
     detailed_metrics_enabled = true
     logging_level = "INFO"
-    throttling_burst_limit = 5000
-    throttling_rate_limit = 10000
+    throttling_burst_limit = 50
+    throttling_rate_limit = 100
   }
 
   tags = {

@@ -1,6 +1,6 @@
 locals {
   build-path = "${path.root}/build"
-  src-path = "${path.root}/../src"
+  src-path = "${path.root}/../src/backend"
   function-src-path = "${local.src-path}/${var.function-name}"
   lambda-name = "${var.app-name}-${var.function-name}"
   lambda_zip_path = "${local.build-path}/${local.lambda-name}.zip"

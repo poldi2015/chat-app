@@ -1,6 +1,6 @@
 locals {
   hosting-bucket-name = "kabatrinkerlean-chat-app"
-  frontend-path = "${path.module}/../frontend"
+  frontend-path = "${path.module}/../src/frontend"
 }
 
 data "aws_iam_policy_document" "hosting-bucket-policy" {

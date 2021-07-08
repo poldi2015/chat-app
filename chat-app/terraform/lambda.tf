@@ -1,5 +1,5 @@
 locals {
-  layers-path = "${path.module}/../layers"
+  layers-path = "${path.module}/../src/backend-layers"
   layers-zip-path = "${local.build-path}/layers.zip"
 }
 
