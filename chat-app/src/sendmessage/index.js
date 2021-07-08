@@ -9,7 +9,8 @@ const { TABLE_NAME } = process.env;
 
 exports.handler = async event => {
   let connectionData;
-  
+
+  console.log(`Received sendmessage request on connection ${event.requestContext.connectionId}`)
   try {
     connectionData = await ddb.scan({ TableName: TABLE_NAME, ProjectionExpression: 'connectionId' }).promise();
   } catch (e) {
