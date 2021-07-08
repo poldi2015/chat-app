@@ -26,6 +26,7 @@ exports.handler = async event => {
   
   const postCalls = connectionData.Items.map(async ({ connectionId }) => {
     try {
+      console.log(`Dispatching message to connection ${connectionId} with data ${postData}`)
       await apigwManagementApi.postToConnection({ ConnectionId: connectionId, Data: postData }).promise();
     } catch (e) {
       if (e.statusCode === 410) {
@@ -40,8 +41,10 @@ exports.handler = async event => {
   try {
     await Promise.all(postCalls);
   } catch (e) {
+    console.log(`Failed to dispatch messages`)
     return { statusCode: 500, body: e.stack };
   }
 
+  console.log(`Succeeded to dispatch messages`)
   return { statusCode: 200, body: 'Data sent.' };
 };
