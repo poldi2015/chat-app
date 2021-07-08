@@ -10,6 +10,7 @@ resource "aws_apigatewayv2_route" "web-socket-onconnect" {
   authorization_type = "NONE"
   operation_name = "ConnectRoute"
   target = aws_apigatewayv2_integration.web-socket-onconnect-integration.id
+  depends_on = [aws_apigatewayv2_integration.web-socket-onconnect-integration]
 }
 
 resource "aws_apigatewayv2_integration" "web-socket-onconnect-integration" {
@@ -24,6 +25,7 @@ resource "aws_apigatewayv2_route" "web-socket-ondisconnect" {
   authorization_type = "NONE"
   operation_name = "DisconnectRoute"
   target = aws_apigatewayv2_integration.web-socket-onconnect-integration.id
+  depends_on = [aws_apigatewayv2_integration.web-socket-disconnect-integration]
 }
 
 resource "aws_apigatewayv2_integration" "web-socket-disconnect-integration" {
@@ -37,6 +39,7 @@ resource "aws_apigatewayv2_route" "web-socket-sendmessage" {
   route_key = "sendmessage"
   operation_name = "SendRoute"
   target = aws_apigatewayv2_integration.web-socket-sendmessage-integration.id
+  depends_on = [aws_apigatewayv2_integration.web-socket-sendmessage-integration]
 }
 
 resource "aws_apigatewayv2_integration" "web-socket-sendmessage-integration" {
